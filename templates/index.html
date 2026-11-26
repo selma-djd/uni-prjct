@@ -45,7 +45,7 @@
       {% for d in departments %}
       <article class="card">
         <h3>{{ d.name }}</h3>
-        <p>{{ d.description }}</p>
+        <p class="department-summary">{{ d.description }}</p>
         <p class="actions">
           <a href="{{ url_for('department_detail', dept_id=d.id) }}">See more</a>
           {% if is_admin %}

@@ -10,6 +10,7 @@ ALTER TABLE departments ADD COLUMN IF NOT EXISTS head         VARCHAR(100) NOT N
 ALTER TABLE departments ADD COLUMN IF NOT EXISTS email        VARCHAR(120) NOT NULL DEFAULT '';
 ALTER TABLE departments ADD COLUMN IF NOT EXISTS programs     TEXT         NOT NULL DEFAULT '';
 ALTER TABLE departments DROP COLUMN IF EXISTS laboratories;
+ALTER TABLE departments DROP COLUMN IF EXISTS details;
 
 -- 2) More details for the 5 existing departments
 
@@ -45,10 +46,9 @@ WHERE name = E'Agronomy' AND head = '';
 
 
 -- 3) The new department: Computer Science
-INSERT INTO departments (name, description, details, head, email, programs)
+INSERT INTO departments (name, description, head, email, programs)
 SELECT E'Computer Science',
        E'Programming, algorithms, databases, networks and artificial intelligence.',
-       E'The Department of Computer Science teaches programming, algorithms and data structures, databases, computer networks, operating systems and software engineering. Students work on projects in web development, cloud computing and artificial intelligence. The department has computer rooms with Linux workstations and a small server room used for networking and cloud practical work.',
        E'Prof. Rania Slimani',
        E'computer-science@boumerdes-university.example',
        E'Bachelor in Computer Science\nMaster in Software Engineering\nMaster in Artificial Intelligence\nMaster in Networks and Cloud Computing'

@@ -9,13 +9,6 @@
     <h1>Department of {{ department.name }}</h1>
     <p class="lead">{{ department.description }}</p>
 
-    {% if department.details %}
-    <div class="info">
-      <h2>Presentation</h2>
-      <p class="pre">{{ department.details }}</p>
-    </div>
-    {% endif %}
-
     {% if department.head %}
     <div class="info">
       <h2>Head of department</h2>

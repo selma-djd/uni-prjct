@@ -6,12 +6,17 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #222;
   background: #fff;
 }
+
+main { flex: 1; }
 
 a { color: #1f3a5f; }
 
@@ -105,6 +110,13 @@ section[id] { scroll-margin-top: 64px; }
 /* ---------- Cards and items ---------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
 .card { background: #fff; border: 1px solid #ccc; padding: 16px; }
+.department-summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
 .item { border-bottom: 1px solid #ddd; padding: 14px 0; }
 .date { color: #666; font-size: 14px; margin: 0 0 4px; }
 .pre { white-space: pre-line; }

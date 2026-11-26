@@ -71,7 +71,6 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(300), nullable=False)  # short text for cards
-    details = db.Column(db.Text, nullable=False, default="")  # long text for detail page
     head = db.Column(db.String(100), nullable=False, default="")  # head of department
     email = db.Column(db.String(120), nullable=False, default="")  # contact email
     programs = db.Column(db.Text, nullable=False, default="")  # one programme per line
@@ -91,62 +90,36 @@ class Announcement(db.Model):
 # --------------------------------------------------------------------------
 # Sample data (fictional)
 # --------------------------------------------------------------------------
-# (name, short description, presentation, head, email, programmes)
+# (name, short description, head, email, programmes)
 SAMPLE_DEPARTMENTS = [
     ("Mathematics",
      "Algebra, analysis, probability and statistics, from first-year courses to research.",
-     "The Department of Mathematics teaches algebra, real and complex analysis, "
-     "probability, statistics and numerical methods. Students follow a common first "
-     "year and then choose between pure mathematics, applied mathematics and "
-     "statistics. The department runs a weekly seminar and supports students who "
-     "wish to continue towards a master's degree or a doctorate.",
      "Prof. Samir Haddad",
      "mathematics@boumerdes-university.example",
      "Bachelor in Mathematics\nBachelor in Applied Mathematics\n"
      "Master in Probability and Statistics\nMaster in Numerical Analysis"),
     ("Physics",
      "Mechanics, electromagnetism, quantum physics and experimental laboratories.",
-     "The Department of Physics covers classical mechanics, thermodynamics, "
-     "electromagnetism, optics and quantum physics. Practical work takes place in "
-     "three teaching laboratories equipped for optics, electronics and nuclear "
-     "measurements. Research groups work on condensed matter and renewable energy.",
      "Prof. Leila Mansouri",
      "physics@boumerdes-university.example",
      "Bachelor in Physics\nMaster in Condensed Matter Physics\nMaster in Renewable Energy"),
     ("Chemistry",
      "General, organic and analytical chemistry with practical laboratory training.",
-     "The Department of Chemistry offers training in general, organic, inorganic and "
-     "analytical chemistry. Students learn laboratory safety and measurement "
-     "techniques from the second semester. Research topics include water analysis, "
-     "natural products and materials for energy storage.",
      "Prof. Yacine Boudiaf",
      "chemistry@boumerdes-university.example",
      "Bachelor in Chemistry\nMaster in Analytical Chemistry\nMaster in Organic Chemistry"),
     ("Biology",
      "Cell biology, genetics, microbiology and ecology, with field and lab work.",
-     "The Department of Biology teaches cell biology, genetics, microbiology, "
-     "physiology and ecology. Field trips and laboratory sessions are part of every "
-     "semester. Final-year students prepare a project in one of the department's "
-     "research teams.",
      "Prof. Nadia Cherif",
      "biology@boumerdes-university.example",
      "Bachelor in Biology\nMaster in Microbiology\nMaster in Genetics\nMaster in Ecology"),
     ("Agronomy",
      "Plant production, soil science and sustainable farming in semi-arid regions.",
-     "The Department of Agronomy trains students in plant production, soil science, "
-     "irrigation and crop protection, with a focus on sustainable farming in "
-     "semi-arid regions. The department manages an experimental farm where students "
-     "carry out practical work and trials throughout the year.",
      "Prof. Omar Belkacem",
      "agronomy@boumerdes-university.example",
      "Bachelor in Agronomy\nMaster in Plant Production\nMaster in Soil Science and Irrigation"),
     ("Computer Science",
      "",
-     "The Department of Computer Science teaches programming, algorithms and data "
-     "structures, databases, computer networks, operating systems and software "
-     "engineering. Students work on projects in web development, cloud computing and "
-     "artificial intelligence. The department has computer rooms with Linux "
-     "workstations and a small server room used for networking and cloud practical work.",
      "Prof. Rania Slimani",
      "computer-science@boumerdes-university.example",
      "Bachelor in Computer Science\nMaster in Software Engineering\n"
@@ -184,9 +157,9 @@ SAMPLE_ANNOUNCEMENTS = [
 def seed_sample_data():
     """Insert sample data only the first time (when both tables are empty)."""
     if Department.query.count() == 0 and Announcement.query.count() == 0:
-        for name, description, details, head, email, programs in SAMPLE_DEPARTMENTS:
-            db.session.add(Department(name=name, description=description, details=details,
-                                      head=head, email=email, programs=programs))
+        for name, description, head, email, programs in SAMPLE_DEPARTMENTS:
+            db.session.add(Department(name=name, description=description, head=head,
+                                      email=email, programs=programs))
         for title, content, days_ago in SAMPLE_ANNOUNCEMENTS:
             db.session.add(Announcement(title=title, content=content,
                                         created_at=now_utc() - timedelta(days=days_ago)))
@@ -267,10 +240,8 @@ def index():
     # The home page only shows 3 departments and the 3 latest announcements.
     # The pages /departments and /announcements show everything.
     departments = Department.query.order_by(Department.id).limit(3).all()
-    department_total = Department.query.count()
     announcements = Announcement.query.order_by(Announcement.created_at.desc()).limit(3).all()
     return render_template("index.html", departments=departments,
-                           department_total=department_total,
                            announcements=announcements)
 
 
@@ -340,7 +311,7 @@ def logout():
 # --------------------------------------------------------------------------
 # Administration: departments
 # --------------------------------------------------------------------------
-DEPARTMENT_FIELDS = ("name", "description", "details", "head", "email", "programs")
+DEPARTMENT_FIELDS = ("name", "description", "head", "email", "programs")
 
 
 def read_department_form():
