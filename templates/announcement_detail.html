@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "macros.html" import delete_form %}
+{% block title %}{{ announcement.title }} - University of Boumerdes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <p><a href="{{ url_for('announcements') }}">&larr; All announcements</a></p>
+    <p class="date">{{ announcement.created_at.strftime('%d %B %Y') }}</p>
+    <h1>{{ announcement.title }}</h1>
+    <p class="pre">{{ announcement.content }}</p>
+    {% if is_admin %}
+    <p class="actions">
+      <a class="btn btn-light" href="{{ url_for('announcement_edit', ann_id=announcement.id) }}">Modify</a>
+      {{ delete_form(url_for('announcement_delete', ann_id=announcement.id)) }}
+    </p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

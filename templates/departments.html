@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "macros.html" import delete_form %}
+{% block title %}Departments - University of Boumerdes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <p><a href="{{ url_for('index') }}#departments">&larr; Back to home</a></p>
+    <h1>Departments</h1>
+    {% if is_admin %}
+      <p><a class="btn" href="{{ url_for('department_new') }}">Add department</a></p>
+    {% endif %}
+    <div class="grid">
+      {% for d in departments %}
+      <article class="card">
+        <h3>{{ d.name }}</h3>
+        <p>{{ d.description }}</p>
+        <p class="actions">
+          <a href="{{ url_for('department_detail', dept_id=d.id) }}">See more</a>
+          {% if is_admin %}
+            <a class="btn btn-light btn-small" href="{{ url_for('department_edit', dept_id=d.id) }}">Modify</a>
+            {{ delete_form(url_for('department_delete', dept_id=d.id)) }}
+          {% endif %}
+        </p>
+      </article>
+      {% else %}
+      <p>No department yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

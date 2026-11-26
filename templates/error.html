@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} - University of Boumerdes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <h1>Error {{ code }}</h1>
+    <p>{{ message }}</p>
+    <p><a class="btn" href="{{ url_for('index') }}">Back to home</a></p>
+  </div>
+</section>
+{% endblock %}

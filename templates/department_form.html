@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Add' if mode == 'new' else 'Modify' }} department - University of Boumerdes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <h1>{{ 'Add a department' if mode == 'new' else 'Modify department' }}</h1>
+
+    <form method="post" class="form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" maxlength="100" required value="{{ form.name }}">
+
+      <label for="description">Short description (shown on the cards, max 300 characters)</label>
+      <textarea id="description" name="description" rows="3" maxlength="300" required>{{ form.description }}</textarea>
+
+      <label for="details">Presentation (shown on the department page)</label>
+      <textarea id="details" name="details" rows="6">{{ form.details }}</textarea>
+
+      <label for="head">Head of department</label>
+      <input type="text" id="head" name="head" maxlength="100" value="{{ form.head }}">
+
+      <label for="programs">Programmes <span class="hint">(one per line)</span></label>
+      <textarea id="programs" name="programs" rows="5">{{ form.programs }}</textarea>
+
+      <label for="email">Contact email</label>
+      <input type="text" id="email" name="email" maxlength="120" value="{{ form.email }}">
+
+      <p class="actions">
+        <button type="submit" class="btn">Save</button>
+        <a class="btn btn-light" href="{{ url_for('departments') }}">Cancel</a>
+      </p>
+    </form>
+  </div>
+</section>
+{% endblock %}

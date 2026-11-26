@@ -1,0 +1,172 @@
+/* University of Boumerdes - simple stylesheet (no frameworks, no icons) */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #222;
+  background: #fff;
+}
+
+a { color: #1f3a5f; }
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 12px; }
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+
+.container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.narrow { max-width: 720px; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  color: #000;
+  border-bottom: 1px solid #ccc;
+}
+.navbar .container { max-width: 1200px; }
+.nav-inner { display: flex; align-items: center; min-height: 64px; }
+.brand { color: #000; font-weight: bold; font-size: 17px; text-decoration: none; margin-right: 18px; }
+
+/* Logos: university on the left, faculty on the right (white box so they stay readable) */
+.logo { display: block; flex-shrink: 0; }
+.logo img { display: block; height: 46px; width: auto; background: #fff; padding: 3px; }
+.logo-university { margin-right: 12px; }
+.logo-faculty { margin-left: 14px; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a { color: #000; text-decoration: none; padding: 16px 12px; display: block; }
+.nav-links a:hover, .nav-links a.active { background: #eee; }
+
+.nav-auth { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.nav-user { font-size: 14px; }
+.nav-links a.nav-button, .nav-button {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-links a.nav-button:hover, .nav-button:hover { background: #eee; color: #000; }
+
+.menu-toggle {
+  display: none;
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Sections ---------- */
+section[id] { scroll-margin-top: 64px; }
+
+/* The dark layer keeps the white text readable over the header image. */
+.hero {
+  padding: 110px 0;
+  color: #fff;
+  border-bottom: 1px solid #c9d3e0;
+  background-color: #1f3a5f;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)),
+    url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero h1 { font-size: 40px; }
+.lead { font-size: 18px; }
+.hero .lead { font-size: 24px; }
+
+.section { padding: 56px 0; }
+.section-alt { background: #f4f4f4; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+#departments, #contact { background-color: #edf3f8; }
+
+/* ---------- Cards and items ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+.card { background: #fff; border: 1px solid #ccc; padding: 16px; }
+.item { border-bottom: 1px solid #ddd; padding: 14px 0; }
+.date { color: #666; font-size: 14px; margin: 0 0 4px; }
+.pre { white-space: pre-line; }
+
+/* Department detail page */
+.info { margin: 20px 0; }
+.info h2 { font-size: 20px; margin-bottom: 6px; }
+.info ul { margin: 0; padding-left: 0; list-style: none; }
+.info p { margin: 0; }
+.hint { font-weight: normal; color: #666; font-size: 14px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #1f3a5f;
+  background: #1f3a5f;
+  color: #fff;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: #2d5282; }
+.btn-light { background: #fff; color: #1f3a5f; }
+.btn-light:hover { background: #e9eef5; }
+.btn-danger { background: #a12626; border-color: #a12626; }
+.btn-danger:hover { background: #7f1d1d; }
+.btn-small { padding: 4px 8px; font-size: 14px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.inline-form { display: inline; margin: 0; }
+
+/* ---------- Forms ---------- */
+.form label { display: block; margin: 14px 0 4px; font-weight: bold; }
+.form input[type="text"], .form input[type="password"], .form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #888;
+  font: inherit;
+}
+.form .btn { margin-top: 16px; }
+
+/* ---------- Messages ---------- */
+.flash { margin: 16px 0 0; padding: 10px 14px; border: 1px solid; }
+.flash-success { background: #e6f3e6; border-color: #7bb37b; }
+.flash-error { background: #fbe9e9; border-color: #d08080; }
+
+/* ---------- Footer ---------- */
+.footer { background: #071a2c; color: #fff; padding: 18px 0; font-size: 14px; }
+.footer p { margin: 0; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .menu-toggle { display: block; order: 2; }
+  .nav-inner { flex-wrap: wrap; padding-top: 6px; padding-bottom: 6px; }
+  .brand { font-size: 14px; line-height: 1.2; margin-right: 8px; flex: 1; min-width: 0; }
+  .menu-toggle { margin-left: 0; padding: 6px 10px; }
+  .logo img { height: 36px; }
+  .logo-university { margin-right: 8px; }
+  .logo-faculty { order: 3; margin-left: 8px; }
+  .nav-links { order: 4; display: none; flex-direction: column; align-items: stretch; width: 100%; flex-basis: 100%; }
+  .nav-links.open { display: flex; }
+  .nav-auth { margin-left: 0; padding: 10px 12px; }
+  .hero { padding: 60px 0; }
+}

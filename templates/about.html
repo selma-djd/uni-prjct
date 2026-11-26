@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}About - University of Boumerdes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <p><a href="{{ url_for('index') }}#about">&larr; Back to home</a></p>
+    <h1>About the Faculty of Sciences</h1>
+    <p>
+      The Faculty of Sciences is part of the University of M'Hamed Bougara in Boumerdes,
+      Algeria. It offers students the opportunity to learn, explore different scientific
+      fields, and develop their knowledge and skills.
+    </p>
+    <p>The faculty brings together different departments, each focusing on a specific field:</p>
+    <ul>
+      <li>Computer Science</li>
+      <li>Mathematics</li>
+      <li>Physics</li>
+      <li>Chemistry</li>
+      <li>Biology</li>
+      <li>Agronomy</li>
+    </ul>
+    <p>
+      The faculty aims to provide a good learning environment where students can gain
+      knowledge, improve their skills, and prepare for their future careers. It also
+      supports scientific research and encourages students to discover and learn new things.
+    </p>
+  </div>
+</section>
+{% endblock %}

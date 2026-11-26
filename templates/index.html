@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% from "macros.html" import delete_form %}
+{% block page %}home{% endblock %}
+
+{% block content %}
+
+<section id="home" class="hero">
+  <div class="container">
+    <h1>University of Boumerdes</h1>
+    <p class="lead">Faculty of Sciences</p>
+    <p>
+      <a class="btn" href="#departments">See departments</a>
+      <a class="btn btn-light" href="#announcements">Latest announcements</a>
+    </p>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="container">
+    <h2>About the Faculty of Sciences</h2>
+    <p>
+      The University of M’Hamed Bougara (UMBB) is located in Boumerdes, Algeria, and offers
+      students the opportunity to study a wide range of academic and scientific disciplines.
+      It aims to provide quality education, promote scientific research, and help students
+      gain the knowledge and skills needed for their future careers.
+    </p>
+    <p>
+      The Faculty of Sciences is an important part of the university and contributes to
+      education and scientific development. It brings together several scientific
+      disciplines, including Computer Science, Mathematics, Physics, Chemistry, Biology,
+      and Agronomy. Through its academic programs and learning environment, the faculty
+      encourages students to explore new ideas, develop their skills, and participate in
+      scientific discovery.
+    </p>
+  </div>
+</section>
+
+<section id="departments" class="section section-alt">
+  <div class="container">
+    <h2>Departments</h2>
+    {% if is_admin %}
+      <p><a class="btn" href="{{ url_for('department_new') }}">Add department</a></p>
+    {% endif %}
+    <div class="grid">
+      {% for d in departments %}
+      <article class="card">
+        <h3>{{ d.name }}</h3>
+        <p>{{ d.description }}</p>
+        <p class="actions">
+          <a href="{{ url_for('department_detail', dept_id=d.id) }}">See more</a>
+          {% if is_admin %}
+            <a class="btn btn-light btn-small" href="{{ url_for('department_edit', dept_id=d.id) }}">Modify</a>
+            {{ delete_form(url_for('department_delete', dept_id=d.id)) }}
+          {% endif %}
+        </p>
+      </article>
+      {% else %}
+      <p>No department yet.</p>
+      {% endfor %}
+    </div>
+    <p><a class="btn" href="{{ url_for('departments') }}">See all departments</a></p>
+  </div>
+</section>
+
+<section id="announcements" class="section">
+  <div class="container">
+    <h2>Announcements</h2>
+    {% if is_admin %}
+      <p><a class="btn" href="{{ url_for('announcement_new') }}">Add announcement</a></p>
+    {% endif %}
+    {% for a in announcements %}
+    <article class="item">
+      <p class="date">{{ a.created_at.strftime('%d %B %Y') }}</p>
+      <h3>{{ a.title }}</h3>
+      <p>{{ a.content|truncate(150) }}</p>
+      {% if is_admin %}
+      <p class="actions">
+        <a class="btn btn-light btn-small" href="{{ url_for('announcement_edit', ann_id=a.id) }}">Modify</a>
+        {{ delete_form(url_for('announcement_delete', ann_id=a.id)) }}
+      </p>
+      {% endif %}
+    </article>
+    {% else %}
+    <p>No announcement yet.</p>
+    {% endfor %}
+    <p><a class="btn" href="{{ url_for('announcements') }}">See all announcements</a></p>
+  </div>
+</section>
+
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <h2>Contact</h2>
+    <p><strong>Address:</strong> Route de la Gare Ferroviaire, Boumerdès 35000, Algeria</p>
+    <p><strong>Official UMBB contact:</strong> contact@univ-boumerdes.dz</p>
+    <p><strong>General Secretary:</strong> sg.fs@univ-boumerdes.dz</p>
+    <p><strong>Phone:</strong> (024) 79 90 05 / (024) 79 90 19</p>
+  </div>
+</section>
+
+{% endblock %}
