@@ -196,7 +196,6 @@ def init_db():
 with app.app_context():
     init_db()
 
-
 # --------------------------------------------------------------------------
 # Security helpers: CSRF token + login_required
 # --------------------------------------------------------------------------
@@ -230,7 +229,6 @@ def login_required(view):
             return redirect(url_for("login"))
         return view(*args, **kwargs)
     return wrapped
-
 
 # --------------------------------------------------------------------------
 # Public pages
@@ -378,7 +376,6 @@ def department_delete(dept_id):
     flash("Department deleted.", "success")
     return redirect(url_for("departments"))
 
-
 # --------------------------------------------------------------------------
 # Administration: announcements
 # --------------------------------------------------------------------------
@@ -438,7 +435,6 @@ def announcement_delete(ann_id):
     db.session.commit()
     flash("Announcement deleted.", "success")
     return redirect(url_for("announcements"))
-
 
 # --------------------------------------------------------------------------
 # Errors and command line
